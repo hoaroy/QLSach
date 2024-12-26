@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Danh sách nhân viên | Quản trị Admin</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Main CSS-->
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+  <!-- or -->
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+  <!-- Font-icon css-->
+  <link rel="stylesheet" type="text/css"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+  <!-- <script>
+    window.onload = function() {
+      if (window.history && window.history.pushState) {
+        window.history.pushState(null, null, window.location.href);
+        window.onpopstate = function() {
+          window.history.go(1);
+        };
+      }
+    };
+  </script> -->
+</head>
+
+<body onload="time()" class="app sidebar-mini rtl" style="background-color: #ebf5fb">
+<!-- Navbar-->
+<header class="app-header" style="background-color: #ebf5fb">
+  <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
+                                  aria-label="Hide Sidebar"></a>
+  <!-- Navbar Right Menu-->
+  <ul class="app-nav">
+
+    <!-- User Menu-->
+    <li><a class="app-nav__item" href="login.html"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+
+    </li>
+  </ul>
+</header>
+<!-- Sidebar menu-->
+<div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+<aside class="app-sidebar" style="background-color:  #ebf5fb">
+  <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="/images/logo.jpg" width="50px"
+                                      alt="User Image">
+    <div>
+      <p class="app-sidebar__user-name"><b style="color: #001C40;">Bookify</b></p>
+      <p class="app-sidebar__user-designation" style="color: #001C40;">Chào mừng bạn trở lại</p>
+    </div>
+  </div>
+  <hr>
+  <ul class="app-menu">
+    <li><a class="app-menu__item active" href="index.html"><i class='app-menu__icon bx bx-tachometer' style="color: #001C40;"></i><span
+            class="app-menu__label" style="color: #001C40;">Quản lý khách hàng</span></a></li>
+
+   <!-- <li><a class="app-menu__item" href="chat-ai.html"><i class='app-menu__icon bx bx-chat' style="color: #001C40;"></i><span class="app-menu__label" style="color: #001C40;">Chăm sóc khách hàng</span></a></li> -->
+    <li><a class="app-menu__item " href="quan-ly-nhan-vien.html"><i class='app-menu__icon bx bx-id-card' style="color: #001C40;"></i> <span
+            class="app-menu__label" style="color: #001C40;">Quản lý nhân viên</span></a></li>
+    <li><a class="app-menu__item" href="quan-ly-san-pham.html"><i
+            class='app-menu__icon bx bx-purchase-tag-alt' style="color: #001C40;"></i><span class="app-menu__label" style="color: #001C40;">Quản lý sản phẩm</span></a>
+    </li>
+    <li><a class="app-menu__item" href="quan-ly-don-hang.html"><i class='app-menu__icon bx bx-task' style="color: #001C40;"></i><span
+            class="app-menu__label" style="color: #001C40;">Quản lý đơn hàng</span></a></li>
+    <li><a class="app-menu__item" href="bao-cao-doanh-thu.html"><i class='app-menu__icon bx bx-bar-chart-alt-2' style="color: #001C40;"></i><span
+            class="app-menu__label" style="color: #001C40;">Báo cáo doanh thu</span></a></li>
+    <li><a class="app-menu__item" href="lich-cong-tac.html"><i class='app-menu__icon bx bx-calendar-check' style="color: #001C40;"></i><span
+            class="app-menu__label" style="color: #001C40;">Lịch công tác </span></a></li>
+    <li><a class="app-menu__item" href="quan-ly-chi-nhanh.html"><i class='app-menu__icon bx bx-store' style="color: #001C40;"></i><span class="app-menu__label" style="color: #001C40;">Quản lý Chi Nhánh</span></a></li>
+  </ul>
+
+</aside>
+<main class="app-content" style="background-color: #ebf5fb">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="app-title">
+        <ul class="app-breadcrumb breadcrumb">
+          <li class="breadcrumb-item"><a href="#"><b>Quản lý khách hàng</b></a></li>
+        </ul>
+        <div id="clock"></div>
+      </div>
+    </div>
+  </div>
+
+    <!--Left-->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="tile">
+            <h3 class="tile-title"> Danh sách Khách hàng</h3>
+            <div class="table-container">
+              <table id="userTable" border="1" class="table table-hover table-bordered">
+                <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Tên Khách Hàng</th>
+                  <th>SĐT</th>
+                  <th>Địa Chỉ</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Dữ liệu khách hàng sẽ được thêm vào đây -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!-- / col-12 -->
+      </div>
+<!-- Chat Box HTML -->
+  <div id="chat-box" class="chat-box">
+    <div id="chat-header" class="chat-header">💬 Chat với chúng tôi</div>
+    <div id="chat-content" class="chat-content"></div>
+    <div class="chat-footer">
+      <input id="chat-input" class="chat-input" type="text" placeholder="Nhập tin nhắn...">
+      <button id="send-button" class="send-button">Gửi</button>
+    </div>
+  </div>
+
+<!-- Chat Box CSS -->
+<style>
+  .chat-box {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 320px;
+    border-radius: 10px;
+    background-color: #fefefe;
+    border: 1px solid #dcdcdc;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+  }
+
+  /* Phần header */
+  .chat-header {
+    background-color: #0078d7;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s;
+  }
+
+  .chat-header:hover {
+    background-color: #005fa3;
+  }
+
+  /* Nội dung chat */
+  .chat-content {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    height: 250px;
+    background-color: #f9f9f9;
+    border-top: 1px solid #dcdcdc;
+    border-bottom: 1px solid #dcdcdc;
+    font-size: 14px;
+  }
+
+  /* Footer chứa input và nút gửi */
+  .chat-footer {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #ffffff;
+  }
+
+  /* Input tin nhắn */
+  .chat-input {
+    flex: 1;
+    border: 1px solid #dcdcdc;
+    border-radius: 20px;
+    padding: 10px;
+    margin-right: 10px;
+    outline: none;
+    font-size: 14px;
+    transition: border-color 0.3s;
+  }
+
+  .chat-input:focus {
+    border-color: #0078d7;
+  }
+
+  /* Nút gửi */
+  .send-button {
+    background-color: #0078d7;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+
+  .send-button:hover {
+    background-color: #005fa3;
+    transform: scale(1.05);
+  }
+
+  .send-button:active {
+    transform: scale(1);
+  }
+</style>
+
+    <!--END left-->
+
+</main>
+<script src="js/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<script src="js/popper.min.js"></script>
+<script src="https://unpkg.com/boxicons@latest/dist/boxicons.js"></script>
+<!--===============================================================================================-->
+<script src="js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+<script src="js/main.js"></script>
+<!--===============================================================================================-->
+<script src="js/plugins/pace.min.js"></script>
+<!--===============================================================================================-->
+<script type="text/javascript" src="js/plugins/chart.js"></script>
+<!--===============================================================================================-->
+
+<!--===============================================================================================-->
+
+
+<!--===============================================================================================-->
+<script>
+  let isNameSet = false;
+  let userName = 'admin'; // Đặt tên mặc định là "admin"
+
+  document.getElementById('chat-header').onclick = function() {
+    const chatBox = document.getElementById('chat-box');
+    chatBox.style.display = chatBox.style.display === 'none' ? 'flex' : 'none';
+  };
+
+  const ws = new WebSocket('ws://localhost:8080'); // Cập nhật URL của máy chủ WebSocket của bạn
+
+  ws.onopen = function() {
+    console.log('Đã kết nối với máy chủ WebSocket');
+    // Gửi tên mặc định là "admin"
+    ws.send(JSON.stringify({ type: 'setName', name: userName }));
+  };
+
+  ws.onmessage = function(event) {
+    const message = JSON.parse(event.data);
+    const chatContent = document.getElementById('chat-content');
+    const messageElement = document.createElement('div');
+
+    // Nhận tin nhắn từ server
+    if (message.type === 'serverMessage') {
+      messageElement.textContent = `${message.name || 'Server'}: ${message.message}`;
+    } else if (message.type === 'chat') {
+      messageElement.textContent = `${message.sender || 'Server'}: ${message.message}`;
+    }
+
+    chatContent.appendChild(messageElement);  //Thêm tin nhắn mới
+    chatContent.scrollTop = chatContent.scrollHeight; //cuộn tin nhắn
+
+    // Kiểm tra nếu tên đã được thiết lập
+    if (message.type === 'success') {
+      isNameSet = true;
+    }
+  };
+
+  document.getElementById('chat-input').onkeypress = function(event) {
+    if (event.key === 'Enter' && isNameSet) {
+      const input = document.getElementById('chat-input');
+      const message = input.value;
+      ws.send(JSON.stringify({ type: 'chat', text: message, sender: userName }));
+      input.value = '';
+    }
+  };
+</script>
+
+
+<!--===============================================================================================-->
+<script type="text/javascript">
+  function time() {
+    var today = new Date();
+    var weekday = new Array(7);
+    weekday[0] = "Chủ Nhật";
+    weekday[1] = "Thứ Hai";
+    weekday[2] = "Thứ Ba";
+    weekday[3] = "Thứ Tư";
+    weekday[4] = "Thứ Năm";
+    weekday[5] = "Thứ Sáu";
+    weekday[6] = "Thứ Bảy";
+    var day = weekday[today.getDay()];
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1;
+    var yyyy = today.getFullYear();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+    nowTime = h + " giờ " + m + " phút " + s + " giây";
+    if (dd < 10) {
+      dd = '0' + dd
+    }
+    if (mm < 10) {
+      mm = '0' + mm
+    }
+    today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+    tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+            '</span>';
+    document.getElementById("clock").innerHTML = tmp;
+    clocktime = setTimeout("time()", "1000", "Javascript");
+
+    function checkTime(i) {
+      if (i < 10) {
+        i = "0" + i;
+      }
+      return i;
+    }
+  }
+  async function fetchUsers() {
+    try {
+      const response = await fetch('http://localhost:8080/user');
+      const users = await response.json();
+
+      const userTable = document.getElementById('userTable').querySelector('tbody');
+      userTable.innerHTML = '';
+
+      users.forEach(user => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${user.id}</td>
+          <td>${user.name}</td>
+          <td>${user.phoneNumber}</td>
+          <td>${user.address}</td>
+        `;
+        userTable.appendChild(row);
+      });
+    } catch (error) {
+      console.error('Error fetching users:', error);
+    }
+  }
+
+  var data = {
+    labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6"],
+    datasets: [{
+      label: "Dữ liệu đầu tiên",
+      fillColor: "rgba(255, 213, 59, 0.767), 212, 59)",
+      strokeColor: "rgb(255, 212, 59)",
+      pointColor: "rgb(255, 212, 59)",
+      pointStrokeColor: "rgb(255, 212, 59)",
+      pointHighlightFill: "rgb(255, 212, 59)",
+      pointHighlightStroke: "rgb(255, 212, 59)",
+      data: [20, 59, 90, 51, 56, 100]
+    },
+      {
+        label: "Dữ liệu kế tiếp",
+        fillColor: "rgba(9, 109, 239, 0.651)  ",
+        pointColor: "rgb(9, 109, 239)",
+        strokeColor: "rgb(9, 109, 239)",
+        pointStrokeColor: "rgb(9, 109, 239)",
+        pointHighlightFill: "rgb(9, 109, 239)",
+        pointHighlightStroke: "rgb(9, 109, 239)",
+        data: [48, 48, 49, 39, 86, 10]
+      }
+    ]
+  };
+  window.onload = function() {
+    time();        // Gọi hàm time
+    fetchUsers();  // Gọi hàm fetchUsers
+  };
+
+</script>
+
+</body>
+<div class="text-center" style="font-size: 13px">
+  <p><b>Phần mềm quản lý bán sách
+    <script type="text/javascript">
+      document.write(new Date().getFullYear());
+    </script>
+  </b></p>
+</div>
+</html>
